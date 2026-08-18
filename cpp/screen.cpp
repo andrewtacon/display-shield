@@ -38,29 +38,29 @@ public:
   uint32_t palXOR;
 
   WDisplay() {
-    uint32_t cfg2 = getConfig(CFG_DISPLAY_CFG2, 8);
+    uint32_t cfg2 = 16;//getConfig(CFG_DISPLAY_CFG2, 8);
 
-    uint32_t cfg0 = getConfig(CFG_DISPLAY_CFG0, 0x02000080);
-    uint32_t frmctr1 = getConfig(CFG_DISPLAY_CFG1, 0x00000603); 
+    uint32_t cfg0 = 0;//getConfig(CFG_DISPLAY_CFG0, 0x02000080);
+    uint32_t frmctr1 = 0x0603;//getConfig(CFG_DISPLAY_CFG1, 0x00000603); 
 
-    int dispTp = getConfig(CFG_DISPLAY_TYPE,4242);
+    int dispTp =  DISPLAY_TYPE_ST7735;//getConfig(CFG_DISPLAY_TYPE,4242);
 
     doubleSize = false;
     smart = NULL;
 
-    auto miso = LOOKUP_PIN(DISPLAY_MISO);
-    dispTp = smartConfigure(&cfg0, &frmctr1, &cfg2);
+    auto miso = NULL;//LOOKUP_PIN(DISPLAY_MISO);
+//    dispTp = smartConfigure(&cfg0, &frmctr1, &cfg2);
 
-    if (dispTp != DISPLAY_TYPE_SMART)
-      miso = NULL; // only JDDisplay needs MISO, otherwise leave free
+    // if (dispTp != DISPLAY_TYPE_SMART)
+    //   miso = NULL; // only JDDisplay needs MISO, otherwise leave free
 
     SPI *spi = new CODAL_SPI(*LOOKUP_PIN(DISPLAY_MOSI), *miso,
                              *LOOKUP_PIN(DISPLAY_SCK));
     io = new SPIScreenIO(*spi);
 
     if (dispTp == DISPLAY_TYPE_ST7735) {
-      width = 160;
-      height = 128;
+      width = 132;
+      height = 132;
       lcd = new ST7735(*io, *LOOKUP_PIN(DISPLAY_CS), *LOOKUP_PIN(DISPLAY_DC));
     } else if (dispTp == DISPLAY_TYPE_SMART) {
       lcd = NULL;
@@ -337,6 +337,8 @@ void updateScreen(Bitmap_ img) {
     }
 
     memcpy(display->screenBuf, img->pix(), img->pixLength());
+
+    display->setAddrWindow(0,0,132,132);
 
     // DMESG("send");
     display->sendIndexedImage(display->screenBuf, img->width(), img->height(),
