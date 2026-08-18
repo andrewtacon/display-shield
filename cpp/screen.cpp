@@ -338,7 +338,7 @@ void updateScreen(Bitmap_ img) {
 
     memcpy(display->screenBuf, img->pix(), img->pixLength());
 
-    display->setAddrWindow(0,0,132,132);
+    // display->setAddrWindow(0,0,132,132);
 
     // DMESG("send");
     display->sendIndexedImage(display->screenBuf, img->width(), img->height(),
