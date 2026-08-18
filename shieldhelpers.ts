@@ -43,11 +43,11 @@ namespace shieldhelpers {
         }
 
         displayHeight(): number {
-            return 120;
+            return 132;
         }
 
         displayWidth(): number {
-            return 160;
+            return 132;
         }
 
         displayPresent(): boolean {
