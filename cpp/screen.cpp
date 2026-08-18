@@ -59,8 +59,8 @@ public:
     io = new SPIScreenIO(*spi);
 
     if (dispTp == DISPLAY_TYPE_ST7735) {
-      width = 132;
-      height = 132;
+      width = 128;
+      height = 128;
       lcd = new ST7735(*io, *LOOKUP_PIN(DISPLAY_CS), *LOOKUP_PIN(DISPLAY_DC));
     } else if (dispTp == DISPLAY_TYPE_SMART) {
       lcd = NULL;

@@ -43,11 +43,11 @@ namespace shieldhelpers {
         }
 
         displayHeight(): number {
-            return 132;
+            return 128;
         }
 
         displayWidth(): number {
-            return 132;
+            return 128;
         }
 
         displayPresent(): boolean {
@@ -158,7 +158,7 @@ namespace shieldhelpers {
     
     //% shim=TD_NOOP
     function simDisplayHeight() {
-        __height = 120
+        __height = 128
         getScreenState();
         if (_screenState)
             __height = _screenState.displayHeight();
@@ -174,7 +174,7 @@ namespace shieldhelpers {
     
     //% shim=TD_NOOP
     function simDisplayWidth() {
-        __width = 160
+        __width = 128
         getScreenState();
         if (_screenState)
             __width = _screenState.displayWidth();
